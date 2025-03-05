@@ -454,6 +454,7 @@ class PolicyRayActorBase(RayActor):
                 # weighted mean for kl
                 if "kl" in status:
                     status["kl"] *= status["response_length"]
+                    status = self.strategy.all_reduce(status)
                     status["kl"] /= status["response_length"]
 
                 short_status = {}
